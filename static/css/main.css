@@ -1,0 +1,102 @@
+body{
+    background-color: darkslategrey;
+    color: white;
+}
+header{
+    /*margin-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: darkslategrey;
+    z-index: 1;*/
+    border:1px solid red;
+}
+header p{
+    font-size: 18px;
+}
+.form{
+    width:80%;
+    margin:50px auto;
+}
+.container{
+    margin-top: 5px;
+}
+.tasks{
+    width: 80%;
+    margin: auto;
+    position: relative;
+    top: 250px;
+    border: 1px solid rgb(47, 26, 167);
+}
+.list-group-item{
+    display: flex;
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0.15);
+    color:white;
+    border-radius: 3px;
+}
+.input-complete{
+    margin-top: 10px;
+    border:2px solid lightgray;
+    transform: scale(1.8);
+}
+.section{
+ width: 30%;
+ padding-right: 20px;
+}
+.complete{
+    padding:2px;
+    color: lightgreen;
+    font-size: 15px;
+}
+.inline{
+    display:inline-flex;
+        width: 70%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.prod-title{
+    color: var(--bs-success);
+    font-size:medium;
+    text-align: center;
+}
+.prod-price{
+    font-size: small;
+    vertical-align: text-bottom;
+    padding: 2px 2px;
+}
+.link-success i {
+    color: var(--bs-primary)
+}
+.link-secondary i {
+    color: var(--bs-primary)
+}
+.link-secondary:hover i, .link-success:hover i {
+    color: var(--bs-danger)
+}
+.border-success{
+    border: 1px solid var(--bs-success);
+    color: var(--bs-success);
+    overflow: hidden;
+    margin-right: 3px;
+}
+
+.border-secondary {
+    border: 1px solid var(--bs-secondary);
+    color: var(--bs-secondary);
+    overflow: hidden;
+    margin-right: 3px;
+}

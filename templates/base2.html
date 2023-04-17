@@ -1,0 +1,35 @@
+{% extends "base1.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+    .important {
+        color: #336699;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h1>Index</h1>
+<p class="important">
+    {% for task in tasks %}
+<div class="list-group-item">
+    <div class="section">
+        <h4>{{task.name}}</h4>
+    </div>
+    <div class="section">
+        <a href="/delete/{{task.id}}/" class="btn btn-danger"><i class="fa fa-2x fa-trash" aria-hidden="true"></i></a>
+    </div>
+    <div class="section">
+
+        {% if task.complete %}
+        <a href="#" class="btn btn-success"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i></a>
+        {% else %}
+        <a href="/complete/{{task.id}}/" class="btn btn-warning"><i class="fa fa-check-circle fa-2x"
+                aria-hidden="true"></i></a>
+        {% endif %}
+
+    </div>
+</div>
+{% endfor %}
+</p>
+{% endblock %}

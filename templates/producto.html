@@ -1,0 +1,50 @@
+{% extends 'base1.html' %}
+{% block title %} Resultados {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for p in products %}
+        <div class="col" style="width:220px">
+            <div class="card shadow-sm">
+                <img src="{{ p['img_url'] }}" class="" alt="...">
+                <h6 class="prod-title text-success"> {{ p.name }} </h5>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {% for key,price in p.price|dictsort(false, 'value') %}
+                            {% if not p['same_price'] %}
+                            {% if loop.first %}
+                            <span class="rounded border-success">
+                                <a class="link-success" href="#"><i class="fab fa-{{key}}"></i></a>
+                                <span class="bg-success text-white prod-price"> $ {{p.price[key]}} </span>
+                            </span>
+                            {% endif %}
+                            {% if loop.last %}
+                            <span class="rounded border-secondary">
+                                <a class="link-secondary" href="#"><i class="fab fa-{{key}}"></i></a>
+                                <span class="bg-secondary text-white prod-price"> $ {{p.price[key]}} </span>
+                            </span>
+                            {% endif %}
+                            {% else %}
+                            <span class="rounded border-secondary">
+                                <a class="link-secondary" href="#"><i class="fab fa-{{key}}"></i></a>
+                                <span class="bg-secondary text-white prod-price"> $ {{p.price[key]}} </span>
+                            </span>
+                            {% endif%}
+                            {% endfor %}
+
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <i class="far fa-star"></i></button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
