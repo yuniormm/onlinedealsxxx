@@ -2,8 +2,11 @@ from flask import Flask,render_template,redirect,request,url_for,jsonify
 from flask_fontawesome import FontAwesome
 from flask_sqlalchemy import SQLAlchemy
 import os, json
-
-
+from ebaysdk.finding import Connection as finding
+import time
+import ssl
+context = ssl.SSLContext()
+context.load_cert_chain('cert.pem', 'key.pem')
 
 app=Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"]="sqlite:///"+os.path.join(app.root_path
@@ -89,6 +92,30 @@ def index2():
     return render_template('base2.html',tasks=tasks,complete_tasks=complete_tasks)
 
 
+@app.route('/api/amazon')
+def search_in_amazon():
+    api_url = "https://api.business.amazon.com/products/2020-08-26/products?keywords=pc"
+
+@app.route('/api/ebay/<keywords>')
+def search_in_ebay(keywords):
+    api = finding(appid = "JorgeCas-12345-SBX-bca7a963e-56b9795b", siteid="EBAY-DE", config_file=None) # change country with "siteid="
+    api_request = { "keywords": keywords, "outputSelector" : "SellerInfo"}
+    response = api.execute("findItemsByKeywords", api_request)
+    # time.sleep(3)
+    soup = BeautifulSoup(response.content, "lxml")
+    items = soup.find_all("item")
+    for item in items:
+         title = item.title.string.lower().strip()
+         price = item.currentprice.string
+         url = item.viewitemurl.string.lower()
+         if item.conditiondisplayname:
+            condition = item.conditiondisplayname.string.lower()
+         else:
+            condition = "n/a"    
+         print(title,"\t",condition,"\t",price)
+    
+
+    
 @app.route('/add',methods=["POST"])
 def create_task():
     task=request.form.get('task')
@@ -118,8 +145,8 @@ def delete_task(id):
     return redirect('/')
 
 if __name__ == "__main__":
-    app.run(debug=True,host='127.0.0.1', port=5001)
+    app.run(debug=True,host='127.0.0.1', port=5001, ssl_context=context)
     
-@app.before_first_request
-def create_tables():
-    db.create_all()
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
